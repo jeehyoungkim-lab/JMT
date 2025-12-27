@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Stat & Graph Tools</title>
+<style>
+  /* 전체 레이아웃 기본 */
+  html, body { height: 100%; }
+  body { font-family: Arial, sans-serif; background-color: #fdfefe; margin:0; overflow-x: hidden; }
+
+  /* 제목 #3A64B0 */
+  h2 { color: #3A64B0; text-align:center; padding:20px; margin:0; }
+
+  /* 4열 고정 + 화면에 맞춰 타일 자동 축소 */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr)); /* 항상 4열, 각 열은 컨테이너 폭 내에서 균등 분할 */
+    gap: 15px;
+    padding: 20px;
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+
+  /* 타일: 정사각형 비율 유지, 내부는 세로 플렉스 */
+  .tile-box {
+    background-color: #3A64B0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    aspect-ratio: 1 / 1;        /* 타일은 항상 정사각형 */
+    box-sizing: border-box;
+  }
+  .tile-box:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  /* 제목 영역: 고정 높이 */
+  .tile-title {
+    flex: 0 0 40px;
+    color: #FDFEFE;
+    font-weight: bold;
+    font-size: 16px;
+   display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* 이미지 영역 래퍼: 남은 공간 전부 */
+  .tile-img-wrap {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  /* 이미지: 타일 크기에 맞춰 강제 조정 (비율 무시) */
+  .tile-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;    /* 비율 유지하지 않고 늘이거나 줄임 */
+  }
+
+  /* 뷰어(iframe) 영역 */
+  #viewer {
+    display:none;
+    width:100%;
+    height:100vh;
+    flex-direction: column;
+  }
+  #viewer iframe {
+    flex:1;
+    width:100%;
+    border:none;
+  }
+  #backBtn {
+    background:#FDFEFE;
+    color:#3A64B0;
+    border:1px solid #3A64B0;
+    border-radius:8px;
+    font-size:18px;
+    font-weight:bold;
+    padding:10px 20px;
+    margin:10px;
+    cursor:pointer;
+    align-self:flex-end;
+  }
+</style>
+</head>
+<body>
+
+<h2 id="mainTitle">Stat & Graph Tools</h2>
+
+<div id="grid" class="grid"></div>
+
+<div id="viewer">
+  <button id="backBtn">🏠 Show List of Stat & Graph Tools</button>
+  <iframe id="appFrame"></iframe>
+</div>
+
+<script>
+const apps = [
+ { name:"Boxplot and jitter plot", url:"https://play208.shinyapps.io/jitterboxplot4/", img:"https://github.com/jeehyoungkim-lab/images/blob/main/tool1.png?raw=true },  // ← 쉼표 추가
+ { name:"Plot with error bar (1)", url:"https://play209.shinyapps.io/error_bar4/", img:"https://github.com/jeehyoungkim-lab/images/blob/main/tool5.png?raw=true" },
+ { name:"Plot with error bar (2)", url:"https://play210.shinyapps.io/Pubr_error_bar4/", img:"https://github.com/jeehyoungkim-lab/images/blob/main/tool19.png?raw=true" },
+ { name:"Plot with significance", url:"https://play211.shinyapps.io/Plot_Significance4/", img:"https://github.com/jeehyoungkim-lab/images/blob/main/tool20.png?raw=true" },
+ { name:"Densitogram and Histogram", url:"https://play212.shinyapps.io/densitogram-histogram/", img:"https://github.com/jeehyoungkim-lab/images/blob/main/tool24.png?raw=true" },
+ { name:"ROC pretty", url:"https://play213.shinyapps.io/ROC4/", img:"https://github.com/jeehyoungkim-lab/images/blob/main/tool8.png?raw=true" },
+ { name:"Kaplan-Meier curve", url:"https://play214.shinyapps.io/survival4/", img:"https://raw.githubusercontent.com/jeehyoungkim-lab/images/288aaf842cb54b86ff917204ab6a4423377ce192/tool2.svg" },
+ { name:"LOWESS", url:"https://play215.shinyapps.io/LOWESS4/", img:"https://github.com/jeehyoungkim-lab/images/blob/main/tool7.png?raw=true" }
+];
+
+// 타일 생성
+const grid = document.getElementById("grid");
+apps.forEach(app => {
+  const tile = document.createElement("div");
+  tile.className = "tile-box";
+  tile.onclick = () => {
+    document.getElementById("grid").style.display = "none";
+    document.getElementById("viewer").style.display = "flex";
+    document.getElementById("appFrame").src = app.url;
+    document.getElementById("mainTitle").style.display = "none"; // 제목 숨기기
+  };
+
+  const title = document.createElement("div");
+  title.className = "tile-title";
+  title.textContent = app.name;
+
+  const wrap = document.createElement("div");
+  wrap.className = "tile-img-wrap";
+
+  const img = document.createElement("img");
+  img.className = "tile-img";
+  img.src = app.img;
+
+  wrap.appendChild(img);
+  tile.appendChild(title);
+  tile.appendChild(wrap);
+  grid.appendChild(tile);
+});
+
+// 돌아가기 버튼
+document.getElementById("backBtn").onclick = () => {
+  document.getElementById("viewer").style.display = "none";
+  document.getElementById("grid").style.display = "grid";
+  document.getElementById("appFrame").src = "";
+  document.getElementById("mainTitle").style.display = "block"; // 제목 다시 보이기
+};
+</script>
+
+</body>
+</html>
+
+
