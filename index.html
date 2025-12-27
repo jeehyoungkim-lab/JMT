@@ -8,8 +8,8 @@
   html, body { height: 100%; }
   body { font-family: Arial, sans-serif; background-color: #fdfefe; margin:0; overflow-x: hidden; }
 
-  /* 제목 #3A64B0 */
-  h2 { color: #3A64B0; text-align:center; padding:20px; margin:0; }
+  /* 제목 #1D3368 */
+  h2 { color: #1D3368; text-align:center; padding:20px; margin:0; }
 
   /* 4열 고정 + 화면에 맞춰 타일 자동 축소 */
   .grid {
@@ -23,7 +23,7 @@
 
   /* 타일: 정사각형 비율 유지, 내부는 세로 플렉스 */
   .tile-box {
-    background-color: #3A64B0;
+    background-color: #1D3368;
     border: 1px solid #ccc;
     cursor: pointer;
     display: flex;
@@ -81,8 +81,8 @@
   }
   #backBtn {
     background:#FDFEFE;
-    color:#3A64B0;
-    border:1px solid #3A64B0;
+    color:#1D3368;
+    border:1px solid #1D3368;
     border-radius:8px;
     font-size:18px;
     font-weight:bold;
@@ -106,14 +106,14 @@
 
 <script>
 const apps = [
- { name:"Boxplot and jitter plot", url:"https://play208.shinyapps.io/jitterboxplot4/", img:"https://github.com/jeehyoungkim-lab/images/blob/main/tool1.png?raw=true" },  // ← 쉼표 추가
- { name:"Plot with error bar (1)", url:"https://play209.shinyapps.io/error_bar4/", img:"https://github.com/jeehyoungkim-lab/images/blob/main/tool5.png?raw=true" },
- { name:"Plot with error bar (2)", url:"https://play210.shinyapps.io/Pubr_error_bar4/", img:"https://github.com/jeehyoungkim-lab/images/blob/main/tool19.png?raw=true" },
- { name:"Plot with significance", url:"https://play211.shinyapps.io/Plot_Significance4/", img:"https://github.com/jeehyoungkim-lab/images/blob/main/tool20.png?raw=true" },
- { name:"Densitogram and Histogram", url:"https://play212.shinyapps.io/densitogram-histogram/", img:"https://github.com/jeehyoungkim-lab/images/blob/main/tool24.png?raw=true" },
- { name:"ROC pretty", url:"https://play213.shinyapps.io/ROC4/", img:"https://github.com/jeehyoungkim-lab/images/blob/main/tool8.png?raw=true" },
- { name:"Kaplan-Meier curve", url:"https://play214.shinyapps.io/survival4/", img:"https://raw.githubusercontent.com/jeehyoungkim-lab/images/288aaf842cb54b86ff917204ab6a4423377ce192/tool2.svg" },
- { name:"LOWESS", url:"https://play215.shinyapps.io/LOWESS4/", img:"https://github.com/jeehyoungkim-lab/images/blob/main/tool7.png?raw=true" }
+ { name:"Boxplot and jitter plot", url:"https://play196.shinyapps.io/jitterboxplot4/", img:"https://github.com/jeehyoungkim-lab/images/blob/main/tool1.png?raw=true" },  // ← 쉼표 추가
+ { name:"Plot with error bar (1)", url:"https://play191.shinyapps.io/error_bar4CIOS/", img:"https://github.com/jeehyoungkim-lab/images/blob/main/tool5.png?raw=true" },
+ { name:"Plot with error bar (2)", url:"https://play191.shinyapps.io/Pubr_error_bar4CIOS/", img:"https://github.com/jeehyoungkim-lab/images/blob/main/tool19.png?raw=true" },
+ { name:"Plot with significance", url:"https://play196.shinyapps.io/Plot_Significance4/", img:"https://github.com/jeehyoungkim-lab/images/blob/main/tool20.png?raw=true" },
+ { name:"Densitogram and Histogram", url:"https://kjh114.shinyapps.io/densitogram-histogram/", img:"https://github.com/jeehyoungkim-lab/images/blob/main/tool24.png?raw=true" },
+ { name:"ROC pretty", url:"https://play196.shinyapps.io/ROC4/", img:"https://github.com/jeehyoungkim-lab/images/blob/main/tool8.png?raw=true" },
+ { name:"Kaplan-Meier curve", url:"https://play196.shinyapps.io/survival4/", img:"https://raw.githubusercontent.com/jeehyoungkim-lab/images/288aaf842cb54b86ff917204ab6a4423377ce192/tool2.svg" },
+ { name:"LOWESS", url:"https://play197.shinyapps.io/LOWESS4/", img:"https://github.com/jeehyoungkim-lab/images/blob/main/tool7.png?raw=true" }
 ];
 
 // 타일 생성
